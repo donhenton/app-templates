@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+                      http://www.springframework.org/schema/security 
+                      http://www.springframework.org/schema/security/spring-security.xsd">
+ 
+    
+    <!--
+    <http auto-config="true" use-expressions="true" access-denied-page="/app/security/demo/denied" >
+	
+		<intercept-url pattern="/*" access="permitAll"/>
+		<intercept-url pattern="/app/security/demo/admin" access="hasRole('ROLE_ADMIN')"/>
+		 
+		
+		<form-login 
+				login-page="/app/security/demo/home?message=Please+login+for+admin+access" 
+				authentication-failure-url="/app/security/demo/home?message=Username+or+password+incorrect" 
+				default-target-url="/app/security/demo/admin"/>
+		
+		<logout 
+				invalidate-session="true" 
+				logout-success-url="/app/security/demo/home?message=Logout+successful"
+				logout-url="/app/security/demo/logout"/>
+				
+          </http>
+    -->
+    
+    
+ 
+  <!-- Get a basic Spring Security provided form based login infra -->
+  <http auto-config="true" use-expressions="true">
+
+    <intercept-url pattern="/login" access="permitAll" />
+    <intercept-url pattern="/loginPage" access="permitAll" />
+    <intercept-url pattern="/logout" access="permitAll" />
+    <intercept-url pattern="/logoutPage" access="permitAll" />
+    <!-- Requests to secured pages need to be authenticated and authorized -->
+    <intercept-url pattern="/secured/*"
+      access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+    <!-- Define the security form login and logout pages/urls -->
+                
+    <form-login  login-processing-url="/login" login-page="/loginPage"
+      username-parameter="username" password-parameter="password"
+      default-target-url="/secured/securedSample"
+      authentication-failure-url="/loginPage?auth=fail" />
+<logout invalidate-session="true" logout-url="/logout"
+      logout-success-url="/logoutPage" />
+  </http>
+ 
+  <!-- Define some example users and admins who have role based access to 
+    the application. In a real world scenario this would be linked with a user 
+    credentials database or a custom authentication provider. Some examples: 
+    1) http://krams915.blogspot.in/2012/01/spring-security-31-implement_1244.html 
+    2) http://krams915.blogspot.in/2010/12/spring-security-mvc-integration-using_26.html -->
+  <authentication-manager>
+    <authentication-provider>
+      <user-service>
+         
+        <user name="user" password="user" authorities="ROLE_USER" />
+        <user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN" />
+      </user-service>
+    </authentication-provider>
+  </authentication-manager>
+</beans:beans>

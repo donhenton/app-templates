@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE tiles-definitions PUBLIC        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="tiles.base.definition" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="Generic Title" />
+		<put-attribute name="subTitle" value="Generic" />
+		<put-attribute name="body" value="" />
+		 
+	</definition>
+	 
+
+        <definition name="tiles.login" extends="tiles.base.definition">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="subTitle" value="Login" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/loginPage_body.jsp" />
+	</definition>
+         <definition name="tiles.logout" extends="tiles.base.definition">
+		<put-attribute name="title" value="Logged Out" />
+		<put-attribute name="subTitle" value="Logged Out" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/logoutPage_body.jsp" />
+	</definition>
+        <definition name="tiles.securedSample" extends="tiles.base.definition">
+		<put-attribute name="title" value="Secure Page" />
+		<put-attribute name="subTitle" value="Secure Page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/secured/securedSample_body.jsp" />
+	</definition>
+
+</tiles-definitions> 
