@@ -6,7 +6,20 @@
             <goals>
                 <goal>clean</goal>
                 <goal>install</goal>
+              
                 <goal>jetty:run-war</goal>
+            </goals>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-wadl generate</actionName>
+            <displayName>wadl generate</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>com.sun.jersey.contribs:maven-wadl-plugin:generate</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>

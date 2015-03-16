@@ -21,7 +21,7 @@
     </properties>
     
     <dependencies>
-        
+         
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -37,7 +37,7 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        
+      
         
         
         
@@ -120,6 +120,59 @@
 
     <build>
         <plugins>
+            <!-- http://stackoverflow.com/questions/9486835/wadl-generation-tool#answer-14742322 -->
+            
+            <plugin>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>maven-wadl-plugin</artifactId>
+                <version>1.17</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>${javadoc-phase}</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <wadlFile>${project.build.outputDirectory}/application.wadl
+                    </wadlFile>
+                    <formatWadlFile>true</formatWadlFile>
+                    <baseUri>http://localhost:${jetty.port}/${project.artifactId}</baseUri>
+                    <packagesResourceConfig>
+                        <param>com.dhenton9000.jersey.template.resources</param>
+                    </packagesResourceConfig>
+                    <wadlGenerators>
+                        <wadlGeneratorDescription>
+                            <className>com.sun.jersey.server.wadl.generators.WadlGeneratorApplicationDoc
+                            </className>
+                            <properties>
+                                <property>
+                                    <name>applicationDocsFile</name>
+                                    <value>${basedir}/src/main/doc/application-doc.xml</value>
+                                </property>
+                            </properties>
+                        </wadlGeneratorDescription>
+                        <wadlGeneratorDescription>
+                            <className>com.sun.jersey.server.wadl.generators.WadlGeneratorGrammarsSupport
+                            </className>
+                            <properties>
+                                <property>
+                                    <name>grammarsFile</name>
+                                    <value>${basedir}/src/main/doc/application-grammars.xml</value>
+                                </property>
+                            </properties>
+                        </wadlGeneratorDescription>
+                    </wadlGenerators>
+                </configuration>
+            </plugin>
+            
+            
+            
+            
+            
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -165,7 +218,7 @@
                         <port>${jetty.port}</port>
                     </httpConnector>
                     <webApp>
-                        <contextPath>/${artifactId}</contextPath>
+                        <contextPath>/${project.artifactId}</contextPath>
                     </webApp>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <scanTargetPatterns>

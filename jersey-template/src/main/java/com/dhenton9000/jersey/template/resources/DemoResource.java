@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.jersey.template.service;
+package com.dhenton9000.jersey.template.resources;
 
 import com.dhenton9000.jersey.template.model.TemplateModel;
+import com.dhenton9000.jersey.template.service.SpringService;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Path("/demo")
-public class DemoService {
+public class DemoResource {
 
     @Autowired
     private SpringService springService;

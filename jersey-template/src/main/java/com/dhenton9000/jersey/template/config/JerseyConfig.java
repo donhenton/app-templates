@@ -5,7 +5,7 @@
  */
 package com.dhenton9000.jersey.template.config;
 
-import com.dhenton9000.jersey.template.service.DemoService;
+import com.dhenton9000.jersey.template.resources.DemoResource;
 import com.dhenton9000.jersey.template.util.CORSResponseFilter;
 import com.dhenton9000.jersey.template.util.LoggingResponseFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -23,7 +23,7 @@ public class JerseyConfig extends ResourceConfig {
 	*/	
 	public JerseyConfig(){
 		register(RequestContextFilter.class);
-		register(DemoService.class);
+		register(DemoResource.class);
 		register(JacksonFeature.class);		
 		register(LoggingResponseFilter.class);
 		register(CORSResponseFilter.class);
