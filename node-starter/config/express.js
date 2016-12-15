@@ -41,7 +41,7 @@ module.exports = function () {
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
-
+    app.use(express.static('./public'));
  
     // Set the application view engine and 'views' folder
     app.set('views', './app/views');
